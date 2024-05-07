@@ -1,0 +1,1 @@
+- add Terminal to Full Disk Access first, otherwise installing parallels breaks

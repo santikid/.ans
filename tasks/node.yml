@@ -1,0 +1,10 @@
+# at this point, fnm is already installed by brew
+
+- name: install node 20
+  shell:
+    cmd: fnm install 20
+    chdir: ~/
+
+- name: install pnpm
+  shell:
+    cmd: npm install -g pnpm

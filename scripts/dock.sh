@@ -18,20 +18,23 @@ check () {
 set_apps() {
     dockutil --remove all
 
-    sleep 3
+    sleep 7
 
     for a in ${apps[@]}
     do
         dockutil -a $a --no-restart
+        sleep 1
     done
 }
 
 settings () {
     defaults write com.apple.dock autohide -bool true
     defaults write com.apple.dock autohide-delay -float 0
+    defaults write com.apple.dock autohide-time-modifier -int 0
     defaults write com.apple.dock orientation left
 }
 
 check
 settings
 set_apps
+killall Dock
