@@ -1,0 +1,24 @@
+- name: create ~/Dotfiles
+  file:
+    path: ~/Dotfiles
+    state: directory
+
+- name: clone santikid/Dotfiles
+  git:
+    dest: ~/Dotfiles
+    repo: https://github.com/santikid/dotfiles.git
+
+- name: download latest clink release (darwin x86_64)
+  vars:
+    arch: "{{ 'aarch64' if ansible_architecture == 'arm64' else 'amd64' }}"
+    os: "{{ 'darwin' if ansible_distribution == 'MacOSX' else 'linux' }}"
+
+  get_url:
+    url: https://github.com/santikid/clink/releases/latest/download/clink_{{ os }}_{{ arch }}
+    dest: ~/Dotfiles/clink
+    mode: '755'
+
+- name: link dotfiles
+  shell:
+    cmd: ~/Dotfiles/clink link
+    chdir: ~/Dotfiles

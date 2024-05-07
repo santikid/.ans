@@ -1,0 +1,11 @@
+- name: Set up machine
+  hosts: localhost
+
+  vars_files: ["homebrew.yml"]
+
+  tasks:
+  - import_tasks: tasks/mac.yml
+    when: ansible_distribution == 'MacOSX'
+    tags: ['mac']
+  - import_tasks: tasks/dotfiles.yml
+    tags: ['dotfiles']
